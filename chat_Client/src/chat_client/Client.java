@@ -22,6 +22,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+/**
+ * 
+ * @author Sambula
+ */
 
 public class Client {
 
@@ -32,8 +36,12 @@ public class Client {
     JFrame frame = new JFrame("CHAT");
     JTextArea messageArea = new JTextArea(30, 50);
     JTextField textField = new JTextField(50);
-
-   
+/**
+ * 
+ * @param host indirizzo del client
+ * @param port porta del client
+ */
+  
     public Client(String host, int port) {
         this.host = host;
         this.port = port;
@@ -53,7 +61,10 @@ public class Client {
         });
      
     }
-
+/**
+ * @see finestra della chat
+ * @throws IOException 
+ */
     private void run() throws IOException {
         try {
             Socket socket = new Socket(host, port);
@@ -71,7 +82,11 @@ public class Client {
             frame.dispose();
         }
     }
-
+/**
+ * <p> assegnazione del host e porta </p>
+ * @param args
+ * @throws Exception 
+ */
     public static void main(String[] args) throws Exception {
         String host = "localhost";
         int portNumber = 5678;
