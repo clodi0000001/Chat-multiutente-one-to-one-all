@@ -29,7 +29,7 @@ public class Server {
     private static Set<String> users = new HashSet<>();
     private static Set<PrintWriter> writers = new HashSet<>();
     
-    private static Set<GestioneChat> usersList = new HashSet<>();
+    private static Set<Server.GestioneChat> usersList = new HashSet<>();
 
     public static void main(String[] args) throws Exception {
         System.out.println("Il server di chat è in funzione...");
@@ -37,7 +37,7 @@ public class Server {
 
         try (ServerSocket listener = new ServerSocket(5678)) {
             while (true) {
-                GestioneChat newUser = new GestioneChat(listener.accept());
+                Server.GestioneChat newUser = new Server.GestioneChat(listener.accept());
                 pool.execute(newUser);
                 usersList.add(newUser);
             }
@@ -81,7 +81,7 @@ public class Server {
                   String[] private_users = parts[0].split(" "); // nomi utente divisi
                   String message = parts[1];              //salva il messaggio privato da inviare
                         for(String pr_user : private_users)
-                        {
+                            {
                             if(users.contains(pr_user))
                             {
                                for(Server.GestioneChat user : usersList)
@@ -171,17 +171,16 @@ public class Server {
                     }
                      else if(input.startsWith("PRV"))
                      {
-                        String private_msg = input.substring(4);
+                         String private_msg = input.substring(4);
                         printPrivateMsg(private_msg);                
-                     }
+                                 }
                      //Lista dei utenti connesi in questa chat
                      else if(input.equals("WHO"))
                      {
-                       printUsers();
-                       /* Alert simpleAlert = driver.switchTo().alert();
-    String alertText = simpleAlert.getText();
-    System.out.println("Alert text is " + alertText);
-    simpleAlert.accept();*/
+                       Alert simpleAlert = driver.switchTo().alert();
+                       //String alertText = simpleAlert.getText();
+                      System.out.println("Alert text is " + printUsers());
+                      simpleAlert.accept();
                      }
                     else    
                     {
