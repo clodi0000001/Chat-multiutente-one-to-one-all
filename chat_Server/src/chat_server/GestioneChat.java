@@ -17,10 +17,9 @@ import javax.swing.JOptionPane;
  *
  * @author Sony
  */
-public class GestioneChat {
-    /*
-        private static Set<String> users = new HashSet<>();
-    private static Set<PrintWriter> writers = new HashSet<>();
+public class GestioneChat implements Runnable {
+   private static final Set<String> users = new HashSet<>();
+    private static final Set<PrintWriter> writers = new HashSet<>();
     private static Set<GestioneChat> usersList = new HashSet<>();
        private Socket socket;
         private String name;
@@ -37,7 +36,7 @@ public class GestioneChat {
             if(users != null && !users.isEmpty())
             {
                 out.println("\n ------------ ");
-                out.println(" \n LIST " + users.size());
+                out.println(" LIST " + users.size());
                 for (String username : users) 
                     out.println(" - "+ username);
             }   
@@ -54,7 +53,7 @@ public class GestioneChat {
                   String[] private_users = parts[0].split(" "); // nomi utente divisi
                   String message = parts[1];              //salva il messaggio privato da inviare
                         for(String pr_user : private_users)
-                        {
+                            {
                             if(users.contains(pr_user))
                             {
                                for(GestioneChat user : usersList)
@@ -144,17 +143,13 @@ public class GestioneChat {
                     }
                      else if(input.startsWith("PRV"))
                      {
-                        String private_msg = input.substring(4);
+                         String private_msg = input.substring(4);
                         printPrivateMsg(private_msg);                
-                     }
+                                 }
                      //Lista dei utenti connesi in questa chat
                      else if(input.equals("WHO"))
                      {
                        printUsers();
-                       /* Alert simpleAlert = driver.switchTo().alert();
-    String alertText = simpleAlert.getText();
-    System.out.println("Alert text is " + alertText);
-    simpleAlert.accept();
                      }
                     else    
                     {
@@ -188,7 +183,8 @@ public class GestioneChat {
                     System.out.println(e);
                 }
             }
-        }*/
-}
+        }
+} 
+
     
 
