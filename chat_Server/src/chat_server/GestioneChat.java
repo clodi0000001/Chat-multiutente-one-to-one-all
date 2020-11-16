@@ -35,13 +35,13 @@ public class GestioneChat implements Runnable {
         {
             if(users != null && !users.isEmpty())
             {
-                out.println("\n ------------ ");
-                out.println(" LIST " + users.size());
+                out.println("\n");
+                out.println("- LIST - " + users.size());
                 for (String username : users) 
                     out.println(" - "+ username);
             }   
             else
-                out.println("Non c'è ancora nessun utente");
+                out.println(" Non c'è ancora nessun utente\n");
         }
       
         public void printPrivateMsg(String private_msg)
@@ -64,7 +64,7 @@ public class GestioneChat implements Runnable {
                                      user.out.println(user.name + ": " + message);                                
                                  }
                                 }
-                            }
+                }
                             else out.println("utente "+ pr_user + " non esiste");
                         }                            
                 }
@@ -81,10 +81,13 @@ public class GestioneChat implements Runnable {
 
                 while (true) {
                     out.println("\n REGOLE/COMANDI DI FUNZIONAMENTO DELLA CHAT ");
-                    out.println(" ------------------------------------------------------------------ \n");
-                    out.println(" 1) Inviare messaggi pubblici con la seguente sintassi MSG 'testo' " +"\n"+" 2)Per inviare messaggi privati scrivere PRV [user1 user2] 'testo' " + "\n" + " 2)Per vivere la chat è sufficiente digitare BYE" + "\n 3)Per sapere chi è oline nella chat basta digitare WHO \n");
-                    out.println(" ------------------------------------------------------------------ \n");
-                    out.println(" Inserisci il nickname con la seguente sintassi IAM username ");
+                    out.println("  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ");
+                    out.println(" | 1) Inviare messaggi pubblici con la seguente sintassi MSG 'testo'  " +"\n"+
+                                " | 2)Per inviare messaggi privati scrivere PRV [user1 user2] 'testo' " + "\n" + 
+                                " | 3)Per vivere la chat è sufficiente digitare BYE \n" +
+                                " | 4)Per sapere chi è oline nella chat basta digitare WHO ");
+                    out.println(" | _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _  _ \n");
+                    out.println("  Inserisci il nickname con la seguente sintassi IAM username ");
                     name = in.nextLine();
                     if (name == null) {
                         return;
@@ -94,10 +97,10 @@ public class GestioneChat implements Runnable {
                         {
                             name = name.substring(4);
                             if(users.contains(name))
-                               out.println("Questo nickname è già stato preso");
+                               out.println("| Questo nickname è già stato preso |\n");
                             else if(name.contains(" ")) 
                             {                                                                
-                                out.println("Scrivi un nome utente senza spazio");
+                                out.println("| Scrivi un nome utente senza spazio |\n");
                             }                                
                             else
                             {  
@@ -105,7 +108,7 @@ public class GestioneChat implements Runnable {
                                 break;
                             }
                         }                       
-                        else if(name != null && name.equals("  Rinserisci il nickname con la seguente sintassi IAM username "))
+                        else if(name != null && name.equals("|  Rinserisci il nickname con la seguente sintassi IAM username |"))
                         {
                             printUsers();
                         }
@@ -119,7 +122,7 @@ public class GestioneChat implements Runnable {
                     writer.println(" Entrato l'utente: " + name );
                 }
                 // questo scritta si vedra nella output del server che indica chi è etratto/conesso
-                System.out.println(name + " joined the chat");
+                System.out.println(name + ": joined the chat");
                 writers.add(out);
 
                 while (true) 
@@ -138,14 +141,14 @@ public class GestioneChat implements Runnable {
                         for (PrintWriter writer : writers) 
                         {
                             //if(writer != this.out)
-                                writer.println(" < "+ name + " > : " + input.substring(4));
+                                writer.println(" > "+ name + " : " + input.substring(4));
                         }
                     }
                      else if(input.startsWith("PRV"))
                      {
                          String private_msg = input.substring(4);
                         printPrivateMsg(private_msg);                
-                                 }
+                      }
                      //Lista dei utenti connesi in questa chat
                      else if(input.equals("WHO"))
                      {
@@ -153,7 +156,7 @@ public class GestioneChat implements Runnable {
                      }
                     else    
                     {
-                          out.println(" ***MESSAGGIO SCONOSCIUTO*** " );       
+                          out.println(" ***MESSAGGIO SCONOSCIUTO*** \n" );       
                     }
                 }
             } catch (Exception e) {
@@ -168,10 +171,10 @@ public class GestioneChat implements Runnable {
                     users.remove(name);
                     for (PrintWriter writer : writers) 
                     {
-                        writer.println(" Utente: " + name + " è uscito ");
+                        writer.println(" Utente: " + name + " è uscito \n");
                     }
                     //questo scritta si vedra nella output del server che indica chi è uscito/disconesso
-                   System.out.println(name + " has left the chat");
+                   System.out.println(name + " has left the chat  \n");
                  
                 }
                 try 
